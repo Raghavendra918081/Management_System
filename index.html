@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>VBA Accounting System</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css">
+</head>
+
+
+<body>
+
+<header class="header">
+
+  <div>
+    <h1>VBA Accounting System</h1>
+    <p>Employee Manpower Accounting</p>
+  </div>
+
+</header>
+
+
+<nav class="nav">
+
+  <button
+    class="nav-btn active"
+    data-page="add">
+    + Add VBA
+  </button>
+
+  <button
+    class="nav-btn"
+    data-page="transfer">
+    ⇄ Transfer
+  </button>
+
+  <button
+    class="nav-btn"
+    data-page="resign">
+    Resign
+  </button>
+
+  <button
+    class="nav-btn"
+    data-page="current">
+    Current VBA
+  </button>
+
+</nav>
+
+
+<main>
+
+
+<!-- =========================================
+ADD VBA
+========================================= -->
+
+<section
+  id="page-add"
+  class="page active">
+
+  <div class="card">
+
+    <h2>Add New VBA</h2>
+
+    <p class="subtitle">
+      Create a new employee and map the first store.
+    </p>
+
+
+    <form id="add-form">
+
+
+      <div class="field">
+
+        <label>Full Name *</label>
+
+        <input
+          id="add-name"
+          required>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Mobile Number *</label>
+
+        <input
+          id="add-mobile"
+          maxlength="10"
+          inputmode="numeric"
+          required>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Date of Birth</label>
+
+        <input
+          id="add-dob"
+          type="date">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Company Employee Code</label>
+
+        <input id="add-code">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Joining Date *</label>
+
+        <input
+          id="add-joining-date"
+          type="date"
+          required>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Store *</label>
+
+        <select
+          id="add-store"
+          required>
+
+          <option value="">
+            Loading stores...
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div
+        id="add-store-preview"
+        class="preview hidden">
+
+        <h3>Store Assignment</h3>
+
+        <div class="info-grid">
+
+          <div>
+            <span>Partner</span>
+            <strong id="add-partner"></strong>
+          </div>
+
+          <div>
+            <span>Zone</span>
+            <strong id="add-zone"></strong>
+          </div>
+
+          <div>
+            <span>City</span>
+            <strong id="add-city"></strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="primary-btn">
+
+        Create VBA
+
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================
+TRANSFER
+========================================= -->
+
+<section
+  id="page-transfer"
+  class="page">
+
+  <div class="card">
+
+    <h2>Transfer VBA</h2>
+
+    <p class="subtitle">
+      Move an active VBA to another store.
+    </p>
+
+
+    <form id="transfer-form">
+
+
+      <div class="field">
+
+        <label>Active VBA *</label>
+
+        <select
+          id="transfer-vba"
+          required>
+        </select>
+
+      </div>
+
+
+      <div
+        id="transfer-current"
+        class="preview hidden">
+
+        <h3>Current Assignment</h3>
+
+        <div class="info-grid">
+
+          <div>
+            <span>Store</span>
+            <strong id="old-store"></strong>
+          </div>
+
+          <div>
+            <span>Partner</span>
+            <strong id="old-partner"></strong>
+          </div>
+
+          <div>
+            <span>Zone</span>
+            <strong id="old-zone"></strong>
+          </div>
+
+          <div>
+            <span>City</span>
+            <strong id="old-city"></strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>New Store *</label>
+
+        <select
+          id="transfer-store"
+          required>
+        </select>
+
+      </div>
+
+
+      <div
+        id="transfer-new"
+        class="preview hidden">
+
+        <h3>New Assignment</h3>
+
+        <div class="info-grid">
+
+          <div>
+            <span>Store</span>
+            <strong id="new-store"></strong>
+          </div>
+
+          <div>
+            <span>Partner</span>
+            <strong id="new-partner"></strong>
+          </div>
+
+          <div>
+            <span>Zone</span>
+            <strong id="new-zone"></strong>
+          </div>
+
+          <div>
+            <span>City</span>
+            <strong id="new-city"></strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Effective Date *</label>
+
+        <input
+          id="transfer-date"
+          type="date"
+          required>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Reason *</label>
+
+        <textarea
+          id="transfer-reason"
+          required></textarea>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="primary-btn">
+
+        Confirm Transfer
+
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================
+RESIGN
+========================================= -->
+
+<section
+  id="page-resign"
+  class="page">
+
+  <div class="card">
+
+    <h2>Resign VBA</h2>
+
+    <p class="subtitle">
+      Close active manpower while retaining history.
+    </p>
+
+
+    <form id="resign-form">
+
+
+      <div class="field">
+
+        <label>Active VBA *</label>
+
+        <select
+          id="resign-vba"
+          required>
+        </select>
+
+      </div>
+
+
+      <div
+        id="resign-preview"
+        class="preview hidden">
+
+        <h3>Current Assignment</h3>
+
+        <div class="info-grid">
+
+          <div>
+            <span>Store</span>
+            <strong id="resign-store"></strong>
+          </div>
+
+          <div>
+            <span>Partner</span>
+            <strong id="resign-partner"></strong>
+          </div>
+
+          <div>
+            <span>Zone</span>
+            <strong id="resign-zone"></strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Last Working Date *</label>
+
+        <input
+          id="resign-date"
+          type="date"
+          required>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Reason *</label>
+
+        <textarea
+          id="resign-reason"
+          required></textarea>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="danger-btn">
+
+        Confirm Resignation
+
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================
+CURRENT VBA
+========================================= -->
+
+<section
+  id="page-current"
+  class="page">
+
+  <div class="wide-card">
+
+    <div class="table-header">
+
+      <div>
+
+        <h2>Current Active VBA</h2>
+
+        <p class="subtitle">
+          Current manpower position
+        </p>
+
+      </div>
+
+
+      <input
+        id="search"
+        class="search"
+        placeholder="Search VBA, store, partner...">
+
+    </div>
+
+
+    <div id="employee-count">
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>VBA ID</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Employee Code</th>
+            <th>Partner</th>
+            <th>Store</th>
+            <th>Zone</th>
+            <th>City</th>
+            <th>Joining Date</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="vba-table">
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================
+CUSTOM MODAL
+========================================= -->
+
+<div
+  id="modal"
+  class="modal-overlay hidden">
+
+  <div class="modal">
+
+    <div
+      id="modal-icon"
+      class="modal-icon">
+      ✓
+    </div>
+
+
+    <h2 id="modal-title">
+      Confirm
+    </h2>
+
+
+    <p
+      id="modal-description"
+      class="modal-description">
+    </p>
+
+
+    <div
+      id="modal-content"
+      class="modal-content">
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        id="modal-cancel"
+        class="secondary-btn">
+
+        Cancel
+
+      </button>
+
+
+      <button
+        id="modal-confirm"
+        class="primary-btn">
+
+        Confirm
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================================
+TOAST
+========================================= -->
+
+<div
+  id="toast-container"
+  class="toast-container">
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
